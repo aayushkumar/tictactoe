@@ -139,10 +139,10 @@
 
           if (isEmpty(xBoard, oBoard, bit)) {
             var participant = gapi.hangout.getParticipantById(gapi.hangout.getParticipantId());
-            if (participant.player.id == players[0] && playerTurn == 0) {
+            if (participant.person.id == players[0] && playerTurn == 0) {
               markBit(bit, 'X');
               playerTurn = 1;
-            } else if (participant.player.id == players[1] && playerTurn == 1) {
+            } else if (participant.person.id == players[1] && playerTurn == 1) {
               markBit(bit, 'O');
               playerTurn = 0;
             } else {
