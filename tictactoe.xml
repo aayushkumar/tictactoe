@@ -8,7 +8,7 @@
 <![CDATA[
     <html>
       <body>
-        <canvas width="500" height="500" id="board""></canvas>
+        <canvas width="500" height="500" id="board"></canvas>
 
         <script src="//hangoutsapi.talkgadget.google.com/hangouts/_/api/hangout.js?v=1.1"></script>
       <script>
@@ -279,10 +279,10 @@
           if (apiInitEvent.isApiReady) {
             paintBoard();
             gapi.hangout.onApiReady.remove(startGame);
-//            if (players.length >= 2) {
-//              var board = document.getElementById("board");
-//              board.onclick = clickHandler(event);
-//            }
+            if (players.length >= 2) {
+              var board = document.getElementById("board");
+              board.onclick = clickHandler(event);
+            }
           }
         }
 
@@ -296,10 +296,10 @@
             }
           }
 
-//          if (players.length >= 2) {
-//            var board = document.getElementById("board");
-//            board.onclick = clickHandler(event);
-//          }
+          if (players.length >= 2) {
+            var board = document.getElementById("board");
+            board.onclick = clickHandler(event);
+          }
         }
 
         function removeParticipant(ParticipantsDisabledEvent) {
