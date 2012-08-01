@@ -8,7 +8,7 @@
 <![CDATA[
     <html>
       <body>
-        <canvas width="500" height="500" id="board" onclick="javascript: clickHandler(event);"></canvas>
+        <canvas width="500" height="500" id="board""></canvas>
 
         <script src="//hangoutsapi.talkgadget.google.com/hangouts/_/api/hangout.js?v=1.1"></script>
       <script>
@@ -45,14 +45,6 @@
 
            context.stroke();
            context.closePath();
-
-           if (begin) {
-              var ini = Math.abs(Math.floor(Math.random() * 9 - 0.1));
-              markBit(1 << ini, 'O');
-              begin = false;
-           } else {
-              begin = true;
-           }
         }
 
         function checkWinner(board) {
@@ -287,6 +279,10 @@
           if (apiInitEvent.isApiReady) {
             paintBoard();
             gapi.hangout.onApiReady.remove(startGame);
+            if (players.length >= 2) {
+              var board = document.getElementById("board");
+              board.onclick = clickHandler(event);
+            }
           }
         }
 
@@ -298,6 +294,11 @@
             if (players.length < 2 && players.indexOf(person_id) == -1) {
               players[players.length] = person_id;
             }
+          }
+
+          if (players.length >= 2) {
+            var board = document.getElementById("board");
+            board.onclick = clickHandler(event);
           }
         }
 
