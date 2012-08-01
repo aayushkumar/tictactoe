@@ -281,7 +281,7 @@
             gapi.hangout.onApiReady.remove(startGame);
             if (players.length >= 2) {
               var board = document.getElementById("board");
-              board.onclick = clickHandler(event);
+              board.onclick = clickHandler;
             }
           }
         }
@@ -298,7 +298,7 @@
 
           if (players.length >= 2) {
             var board = document.getElementById("board");
-            board.onclick = clickHandler(event);
+            board.onclick = clickHandler;
           }
         }
 
