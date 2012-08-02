@@ -99,13 +99,12 @@ function paintO(x, y) {
 function stateChanged(StateChangedEvent) {
   var added_keys = StateChangedEvent.addedKeys;
 
-  console.log("Added Keys 0: " + String(added_keys[0]));
+  console.log("Added Keys 0: " + JSON.stringify(added_keys[0]));
   console.log("Added keys length: " + String(added_keys.length));
   // Since, state is changed only by setValue, it is safe to assume that there
   // will be at most one key that will be added.
-  if (added_keys[0] == 'players') {
-      players = gapi.hangout.data.getValue('players');
-      players = JSON.parse(players);
+  if (added_keys[0].key == 'players') {
+      players = JSON.parse(added_keys[0].value);
       console.log("Players received");
       console.log("Player 0:" + String(players[0]));
       console.log("Player 1:" + String(players[1]));
