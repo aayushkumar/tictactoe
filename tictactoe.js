@@ -127,6 +127,10 @@ function clickHandler(e) {
     if ( (playerTurn == 0 && participant.person.id != players[0]) ||
          (playerTurn == 1 && participant.person.id != players[1]) ) {
         console.log("Need to return from clickHandler");
+        console.log("Player turn: " + String(playerTurn));
+        console.log("Person id: " + String(participant.person.id));
+        console.log("Player 0: " + String(players[0]));
+        console.log("Player 1: " + String(players[1]));
         return;
     }
 
@@ -289,6 +293,7 @@ function addParticipant(ParticipantsEnabledEvent) {
     console.log("Person is: " + String(person_id));
     if (players.length < 2 && players.indexOf(person_id) == -1) {
       players[players.length] = person_id;
+      console.log("Player " + String(players.length - 1) + ": " + String(person_id));
     }
   }
 
