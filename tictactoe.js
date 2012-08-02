@@ -97,6 +97,16 @@ function paintO(x, y) {
 
 
 function stateChanged(StateChangedEvent) {
+  var added_keys = StateChangedEvent.addedKeys;
+
+  // Since, state is changed only by setValue, it is safe to assume that there
+  // will be at most one key that will be added.
+  if (added_keys[0] == 'players') {
+      players = gapi.hangout.data.getValue('players');
+      players = JSON.parse(players);
+      return;
+  }
+
   var bit = gapi.hangout.data.getValue('bit');
   bit = JSON.parse(bit);
 
@@ -297,10 +307,12 @@ function addParticipant(ParticipantsEnabledEvent) {
     }
   }
 
-//          if (players.length >= 2) {
-//            var board = document.getElementById("board");
-//            board.onclick = clickHandler;
-//          }
+          if (players.length >= 2) {
+            gapi.hangout.data.setValue('players', JSON.stringify(players));
+
+            //var board = document.getElementById("board");
+            //board.onclick = clickHandler;
+          }
 }
 
 function removeParticipant(ParticipantsDisabledEvent) {
