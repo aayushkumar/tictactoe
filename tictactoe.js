@@ -153,16 +153,24 @@ function clickHandler(e) {
 
     if (!checkNobody())  {
       if (checkWinner(xBoard)) {
-        alert('You win!!');
+        if (participant.person.id == players[0]) {
+            alert('You win!!');
+        } else {
+            alert('You lose!!');
+        }
         restart();
       } else {
-        play();
-        if (!checkNobody()) {
+    //    play();
+//        if (!checkNobody()) {
           if (checkWinner(oBoard)) {
-            alert('Loser!!');
+            if (participant.person.id == players[1]) {
+                alert('You win!!');
+            } else {
+                alert('You lose!!');
+            }
             restart();
           }
-        }
+//        }
       }
     }
   }
@@ -181,6 +189,7 @@ function restart() {
    context.clearRect (0, 0, width , height);
    xBoard = 0;
    oBoard = 0;
+   playerTurn = 0;
    paintBoard();
 }
 
