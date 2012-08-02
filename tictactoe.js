@@ -96,6 +96,32 @@ function paintO(x, y) {
 }
 
 
+function checkBoard() {
+    var participant = gapi.hangout.getParticipantById(gapi.hangout.getParticipantId());
+    if (!checkNobody())  {
+      if (checkWinner(xBoard)) {
+        if (participant.person.id == players[0]) {
+            alert('You win!!');
+        } else {
+            alert('You lose!!');
+        }
+        restart();
+      } else {
+    //    play();
+//        if (!checkNobody()) {
+          if (checkWinner(oBoard)) {
+            if (participant.person.id == players[1]) {
+                alert('You win!!');
+            } else {
+                alert('You lose!!');
+            }
+            restart();
+          }
+//        }
+      }
+    }
+}
+
 function stateChanged(StateChangedEvent) {
   var added_keys = StateChangedEvent.addedKeys;
 
@@ -126,6 +152,8 @@ function stateChanged(StateChangedEvent) {
     markBit(bit, 'O');
     playerTurn = 0;
   }
+
+  checkBoard();
 }
 
 function clickHandler(e) {
@@ -150,30 +178,8 @@ function clickHandler(e) {
     }
 
     gapi.hangout.data.setValue('bit', JSON.stringify(bit));
-
-    if (!checkNobody())  {
-      if (checkWinner(xBoard)) {
-        if (participant.person.id == players[0]) {
-            alert('You win!!');
-        } else {
-            alert('You lose!!');
-        }
-        restart();
-      } else {
-    //    play();
-//        if (!checkNobody()) {
-          if (checkWinner(oBoard)) {
-            if (participant.person.id == players[1]) {
-                alert('You win!!');
-            } else {
-                alert('You lose!!');
-            }
-            restart();
-          }
-//        }
-      }
-    }
   }
+
 }
 
 function checkNobody(){
