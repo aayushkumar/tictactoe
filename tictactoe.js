@@ -100,9 +100,9 @@ function stateChanged(StateChangedEvent) {
   var bit = gapi.hangout.data.getValue('bit');
   bit = JSON.parse(bit);
 
-  document.write("State changed");
-  document.write("Current player turn: " + String(playerTurn));
-  document.write("bit is: " + String(bit));
+  console.log("State changed");
+  console.log("Current player turn: " + String(playerTurn));
+  console.log("bit is: " + String(bit));
 
   if (playerTurn == 0) {
      markBit(bit, 'X');
@@ -114,19 +114,19 @@ function stateChanged(StateChangedEvent) {
 }
 
 function clickHandler(e) {
-  document.write("Click registered");
+  console.log("Click registered");
   var y = Math.floor(e.clientY / (height / 3));
   var x =  Math.floor(e.clientX / (width/ 3));
 
   var bit =  (1 << x + ( y * 3 ));
 
   if (isEmpty(xBoard, oBoard, bit)) {
-      document.write("Board pos is not empty");
+      console.log("Board pos is not empty");
     var participant = gapi.hangout.getParticipantById(gapi.hangout.getParticipantId());
 
     if ( (playerTurn == 0 && participant.person.id != players[0]) ||
          (playerTurn == 1 && participant.person.id != players[1]) ) {
-        document.write("Need to return from clickHandler");
+        console.log("Need to return from clickHandler");
         return;
     }
 
@@ -270,9 +270,9 @@ function play() {
 
 function startGame(apiInitEvent) {
   if (apiInitEvent.isApiReady) {
-    document.write("API is ready!");
+    console.log("API is ready!");
     paintBoard();
-    document.write("Board painted");
+    console.log("Board painted");
     gapi.hangout.onApiReady.remove(startGame);
 //            if (players.length >= 2) {
 //              var board = document.getElementById("board");
@@ -286,7 +286,7 @@ function addParticipant(ParticipantsEnabledEvent) {
 
   for (var i = 0; i < participants.length; i++) {
     var person_id = participants[i].person.id;
-    document.write("Person is: " + String(person_id));
+    console.log("Person is: " + String(person_id));
     if (players.length < 2 && players.indexOf(person_id) == -1) {
       players[players.length] = person_id;
     }
@@ -302,7 +302,7 @@ function removeParticipant(ParticipantsDisabledEvent) {
   participants = ParticipantsEnabledEvent.disabledParticipants;
 
   for (var i = 0; i < participants.length; i++) {
-    document.write("Person removed: " + String(person_id));
+    console.log("Person removed: " + String(person_id));
     var idx = players.indexOf(participants[i].person.id);
     if (idx != -1) {
       players.splice(idx, 1);
